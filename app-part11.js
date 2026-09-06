@@ -1140,40 +1140,60 @@ function setupFirebaseAuthState() {
 
 function showPage(pageId) {
 
+    console.log("Opening page:", pageId);
+
+    // Hide all pages
     document
         .querySelectorAll(".page")
         .forEach(page => {
-
-            page.classList.remove(
-                "active"
-            );
+            page.classList.remove("active");
         });
 
-
+    // Find selected page
     const selectedPage =
-        $(pageId);
+        document.getElementById(pageId);
 
-
-    if (selectedPage) {
-
-        selectedPage.classList.add(
-            "active"
+    if (!selectedPage) {
+        console.error(
+            "MindMate page not found:",
+            pageId
         );
+        return;
     }
 
+    // Show selected page
+    selectedPage.classList.add("active");
 
+    // Update navigation buttons
     document
         .querySelectorAll("[data-page]")
         .forEach(button => {
-
             button.classList.toggle(
                 "active",
-                button.dataset.page ===
-                pageId
+                button.dataset.page === pageId
             );
         });
 
+    // Refresh page content
+    if (pageId === "home") {
+        if (typeof renderDashboard === "function") {
+            renderDashboard();
+        }
+    }
 
+    if (pageId === "history") {
+        if (typeof renderHistory === "function") {
+            renderHistory();
+        }
+    }
+
+    if (pageId === "ai") {
+        if (typeof renderChat === "function") {
+            renderChat();
+        }
+    }
+
+    // Scroll to top
     window.scrollTo({
         top: 0,
         behavior: "smooth"
