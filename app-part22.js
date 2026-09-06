@@ -1115,4 +1115,348 @@ async function sendChatMessage() {
 
 
         addChatMessage(
-            "a
+            "ai",
+            response,
+            true
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Chat error:",
+            error
+        );
+
+
+        thinking.remove();
+
+
+        addChatMessage(
+            "ai",
+            getDemoAIResponse(
+                text
+            ),
+            true
+        );
+    }
+
+
+    if (button) {
+
+        button.disabled =
+            false;
+    }
+}
+
+
+/* =========================================
+   CLEAR CHAT
+========================================= */
+
+async function clearChat() {
+
+    if (
+        !confirm(
+            "Clear all chat messages?"
+        )
+    ) {
+
+        return;
+    }
+
+
+    const user =
+        currentUser();
+
+
+    if (!user) {
+        return;
+    }
+
+
+    try {
+
+        const chatRef =
+            getChatCollection();
+
+
+        if (!chatRef) {
+            return;
+        }
+
+
+        const snapshot =
+            await window.firestoreGetDocs(
+                chatRef
+            );
+
+
+        const deletePromises =
+            snapshot.docs.map(
+                chatDoc =>
+                    window.firestoreDeleteDoc(
+                        chatDoc.ref
+                    )
+            );
+
+
+        await Promise.all(
+            deletePromises
+        );
+
+
+        user.chat =
+            [];
+
+
+        renderChat();
+
+
+        showToast(
+            "Chat history cleared."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Clear chat error:",
+            error
+        );
+
+
+        showToast(
+            "Unable to clear chat."
+        );
+    }
+}
+
+
+/* =========================================
+   APP NAVIGATION
+========================================= */
+
+function setupNavigation() {
+
+    document
+        .querySelectorAll(
+            "[data-page]"
+        )
+        .forEach(
+            button => {
+
+                if (
+                    button.dataset
+                        .mindmateNavigationReady ===
+                    "true"
+                ) {
+
+                    return;
+                }
+
+
+                button.dataset
+                    .mindmateNavigationReady =
+                    "true";
+
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        showPage(
+                            button.dataset.page
+                        );
+                    }
+                );
+            }
+        );
+}
+
+
+/* =========================================
+   CHAT SETUP
+========================================= */
+
+function setupChat() {
+
+    const sendButton =
+        $("sendMessage");
+
+
+    const chatInput =
+        $("chatInput");
+
+
+    const clearButton =
+        $("clearChatBtn");
+
+
+    /* SEND BUTTON */
+
+    if (
+        sendButton &&
+        sendButton.dataset
+            .mindmateReady !==
+            "true"
+    ) {
+
+        sendButton.dataset
+            .mindmateReady =
+            "true";
+
+
+        sendButton.addEventListener(
+            "click",
+            sendChatMessage
+        );
+    }
+
+
+    /* ENTER KEY */
+
+    if (
+        chatInput &&
+        chatInput.dataset
+            .mindmateReady !==
+            "true"
+    ) {
+
+        chatInput.dataset
+            .mindmateReady =
+            "true";
+
+
+        chatInput.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                        "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    sendChatMessage();
+                }
+            }
+        );
+    }
+
+
+    /* CLEAR CHAT */
+
+    if (
+        clearButton &&
+        clearButton.dataset
+            .mindmateReady !==
+            "true"
+    ) {
+
+        clearButton.dataset
+            .mindmateReady =
+            "true";
+
+
+        clearButton.addEventListener(
+            "click",
+            clearChat
+        );
+    }
+}
+
+
+/* =========================================
+   THEME
+========================================= */
+
+function setupTheme() {
+
+    const themeToggle =
+        $("themeToggle");
+
+
+    if (!themeToggle) {
+        return;
+    }
+
+
+    if (
+        themeToggle.dataset
+            .mindmateReady ===
+        "true"
+    ) {
+
+        return;
+    }
+
+
+    themeToggle.dataset
+        .mindmateReady =
+        "true";
+
+
+    themeToggle.addEventListener(
+        "click",
+        function () {
+
+            document.body.classList.toggle(
+                "light-mode"
+            );
+        }
+    );
+}
+
+
+/* =========================================
+   APP SETUP
+========================================= */
+
+function setupApp() {
+
+    /*
+       Prepare UI listeners first.
+    */
+
+    setupNavigation();
+
+    setupChat();
+
+    setupTheme();
+
+
+    const user =
+        currentUser();
+
+
+    if (!user) {
+        return;
+    }
+
+
+    /* DASHBOARD */
+
+    renderDashboard();
+
+
+    /* HISTORY */
+
+    renderHistory();
+
+
+    /* CHAT */
+
+    renderChat();
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+console.log(
+    "MindMate App Part 2 Firebase loaded ✅"
+);
