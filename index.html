@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#080b16">
+    <meta name="description" content="MindmateAi - Your private AI journal">
+    <title>MindmateAi — Personal AI Journal</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= BACKGROUND ================= -->
+
+<div class="background-effects">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="orb orb-three"></div>
+</div>
+
+
+<!-- ================= AUTH SCREEN ================= -->
+
+<section id="authScreen" class="auth-screen">
+
+    <div class="auth-card glass">
+
+        <div class="brand-large">
+
+            <div class="brand-icon">
+                🧠
+            </div>
+
+            <div>
+                <h1>Mindmate<span>Ai</span></h1>
+                <p>Your private AI reflection space</p>
+            </div>
+
+        </div>
+
+
+        <div class="auth-welcome">
+
+            <h2 id="authTitle">
+                Welcome back 👋
+            </h2>
+
+            <p id="authSubtitle">
+                Your private space for thoughts, feelings and reflection.
+            </p>
+
+        </div>
+
+
+        <!-- AUTH FORM -->
+
+        <form id="authForm">
+
+            <div class="input-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="password-toggle"
+                        aria-label="Show or hide password"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="authButton"
+                class="primary-button"
+            >
+                Sign In
+            </button>
+
+        </form>
+
+
+        <!-- SWITCH LOGIN / SIGNUP -->
+
+        <button
+            type="button"
+            id="authSwitch"
+            class="text-button"
+        >
+            Don't have an account?
+            <span>Create one</span>
+        </button>
+
+
+        <div class="privacy-note">
+    🔒 Your journals are stored locally on this device.
+        </div>
+
+</section>
+
+
+
+<!-- ================= MAIN APP ================= -->
+
+<section id="appScreen" class="app-screen hidden">
+
+
+    <!-- ================= TOPBAR ================= -->
+
+    <header class="topbar">
+
+        <div class="topbar-brand">
+
+            <div class="small-brand-icon">
+                🧠
+            </div>
+
+            <div>
+
+                <h2>
+                    Mindmate<span>Ai</span>
+                </h2>
+
+                <p>
+                    Your reflection companion
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOPBAR ACTIONS -->
+
+        <div class="topbar-actions">
+
+            <button
+                id="themeToggle"
+                class="icon-button"
+                title="Change theme"
+                aria-label="Change theme"
+            >
+                🌙
+            </button>
+
+
+            <button
+                id="profileButton"
+                class="profile-button"
+                title="Profile"
+                aria-label="Open profile"
+            >
+
+                <span id="profileAvatar">
+                    D
+                </span>
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= HOME ================= -->
+
+    <main id="home" class="page active">
+
+        <div class="greeting">
+
+            <div>
+
+                <p class="eyebrow">
+                    Good morning
+                </p>
+
+                <h1>
+                    How are you feeling today? 👋
+                </h1>
+
+                <p class="muted">
+                    Take a moment for yourself.
+                </p>
+
+            </div>
+
+
+            <div
+                id="homeAvatar"
+                class="avatar"
+            >
+                D
+            </div>
+
+        </div>
+
+
+        <!-- MOOD -->
+
+        <section class="section-block">
+
+            <div class="section-title">
+
+                <h2>
+                    Today's mood
+                </h2>
+
+                <span>
+                    Choose one
+                </span>
+
+            </div>
+
+
+            <div class="mood-grid">
+
+                <button
+                    class="mood-card selected"
+                    data-mood="Happy"
+                >
+                    <span>😊</span>
+                    <small>Happy</small>
+                </button>
+
+
+                <button
+                    class="mood-card"
+                    data-mood="Calm"
+                >
+                    <span>😌</span>
+                    <small>Calm</small>
+                </button>
+
+
+                <button
+                    class="mood-card"
+                    data-mood="Okay"
+                >
+                    <span>🙂</span>
+                    <small>Okay</small>
+                </button>
+
+
+                <button
+                    class="mood-card"
+                    data-mood="Sad"
+                >
+                    <span>😔</span>
+                    <small>Sad</small>
+                </button>
+
+
+                <button
+                    class="mood-card"
+                    data-mood="Stressed"
+                >
+                    <span>😣</span>
+                    <small>Stressed</small>
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- QUICK ACTIONS -->
+
+        <section class="section-block">
+
+            <div class="section-title">
+
+                <h2>
+                    Quick actions
+                </h2>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+                <button
+                    class="quick-card"
+                    data-page="journal"
+                >
+
+                    <div class="quick-icon">
+                        ✍️
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            New Journal
+                        </strong>
+
+                        <span>
+                            Write your thoughts
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </button>
+
+
+                <button
+                    class="quick-card"
+                    data-page="ai"
+                >
+
+                    <div class="quick-icon">
+                        ✨
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Talk to Mindmate
+                        </strong>
+
+                        <span>
+                            Reflect with AI
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- STREAK -->
+
+        <section class="streak-card glass">
+
+            <div class="streak-icon">
+                🔥
+            </div>
+
+            <div>
+
+                <strong>
+                    5 day streak
+                </strong>
+
+                <p>
+                    You're building a great reflection habit.
+                </p>
+
+            </div>
+
+            <div class="streak-number">
+                5
+            </div>
+
+        </section>
+
+
+
+        <!-- RECENT JOURNALS -->
+
+        <section class="section-block">
+
+            <div class="section-title">
+
+                <h2>
+                    Recent journals
+                </h2>
+
+                <button
+                    class="small-link"
+                    data-page="history"
+                >
+                    View all
+                </button>
+
+            </div>
+
+
+            <div class="journal-preview glass">
+
+                <div class="preview-top">
+
+                    <span class="mood-dot">
+                        😊
+                    </span>
+
+                    <span>
+                        Today
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    A peaceful morning
+                </h3>
+
+
+                <p>
+                    Today started calmly. I took some time to think
+                    about the things I'm grateful for...
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= JOURNAL ================= -->
+
+    <main id="journal" class="page">
+
+        <div class="page-heading">
+
+            <p class="eyebrow">
+                PRIVATE JOURNAL
+            </p>
+
+            <h1>
+                Write it out ✍️
+            </h1>
+
+            <p class="muted">
+                Put your thoughts into words. This space is yours.
+            </p>
+
+        </div>
+
+
+        <div class="editor-card glass">
+
+            <input
+                type="text"
+                id="journalTitle"
+                class="journal-title"
+                placeholder="Give your journal a title..."
+            >
+
+
+            <textarea
+                id="thoughts"
+                class="journal-textarea"
+                placeholder="What's on your mind today?"
+            ></textarea>
+
+
+            <div class="editor-meta">
+
+                <span>
+                    🔒 Private
+                </span>
+
+                <span id="characterCount">
+                    0 characters
+                </span>
+
+            </div>
+
+
+            <div class="editor-moods">
+
+                <span>
+                    How are you feeling?
+                </span>
+
+
+                <div>
+
+                    <button
+                        class="editor-mood selected"
+                        data-editor-mood="Happy"
+                    >
+                        😊
+                    </button>
+
+
+                    <button
+                        class="editor-mood"
+                        data-editor-mood="Calm"
+                    >
+                        😌
+                    </button>
+
+
+                    <button
+                        class="editor-mood"
+                        data-editor-mood="Okay"
+                    >
+                        🙂
+                    </button>
+
+
+                    <button
+                        class="editor-mood"
+                        data-editor-mood="Sad"
+                    >
+                        😔
+                    </button>
+
+
+                    <button
+                        class="editor-mood"
+                        data-editor-mood="Stressed"
+                    >
+                        😣
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="editor-actions">
+
+                <button
+                    id="saveJournal"
+                    class="primary-button"
+                >
+                    Save Journal
+                </button>
+
+
+                <button
+                    class="secondary-button"
+                    data-page="ai"
+                >
+                    ✨ Reflect with Mindmate
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= AI ================= -->
+
+    <main id="ai" class="page">
+
+        <div class="page-heading">
+
+            <p class="eyebrow">
+                AI REFLECTION
+            </p>
+
+            <h1>
+                Talk to Mindmate ✨
+            </h1>
+
+            <p class="muted">
+                A thoughtful space to explore your ideas.
+            </p>
+
+        </div>
+
+
+        <div class="ai-card glass">
+
+            <div
+                id="chatMessages"
+                class="chat-messages"
+            >
+
+                <div class="chat-message ai-message">
+
+                    <div class="message-bubble">
+                        Hi! I'm Mindmate. What's on your mind today? 💜
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- THINKING INDICATOR -->
+
+            <div
+                class="thinking"
+                id="thinking"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+
+            <!-- CHAT INPUT -->
+
+            <div class="chat-input-area">
+
+                <textarea
+                    id="chatInput"
+                    rows="1"
+                    placeholder="Share what's on your mind..."
+                ></textarea>
+
+
+                <button
+                    id="sendMessage"
+                    class="send-button"
+                    aria-label="Send message"
+                >
+                    ➤
+                </button>
+
+            </div>
+
+
+            <div class="ai-tools">
+                <button
+                    type="button"
+                    id="clearChatBtn"
+                    class="secondary-button"
+                >
+                    🧹 Clear chat
+                </button>
+            </div>
+
+            <p class="ai-disclaimer">
+                Mindmate provides reflective support, not professional advice.
+            </p>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= HISTORY ================= -->
+
+    <main id="history" class="page">
+
+        <div class="page-heading">
+
+            <p class="eyebrow">
+                YOUR JOURNALS
+            </p>
+
+            <h1>
+                Journal history 📖
+            </h1>
+
+            <p class="muted">
+                Revisit your previous reflections.
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <span>
+                🔎
+            </span>
+
+            <input
+                id="historySearch"
+                type="search"
+                placeholder="Search journals..."
+            >
+
+        </div>
+
+
+        <!-- HISTORY LIST -->
+
+        <div class="history-list" id="historyList">
+
+            <div class="history-empty">
+                <div class="history-empty-icon">📖</div>
+
+                <h3>No journals yet</h3>
+
+                <p>
+                    Your saved journals will appear here.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= PROFILE OVERLAY ================= -->
+
+    <div
+        id="profileOverlay"
+        class="profile-overlay hidden"
+    >
+
+        <div
+            class="profile-panel glass"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="profileTitle"
+        >
+
+            <!-- CLOSE -->
+
+            <button
+                id="closeProfile"
+                class="close-profile"
+                aria-label="Close profile"
+            >
+                ✕
+            </button>
+
+
+            <!-- PROFILE HEADER -->
+
+            <div class="profile-header">
+
+                <div
+                    id="profileLargeAvatar"
+                    class="profile-large-avatar"
+                >
+                    D
+                </div>
+
+
+                <h2 id="profileTitle">
+                    Your Profile
+                </h2>
+
+
+                <p>
+                    Your private MindmateAi account
+                </p>
+
+            </div>
+
+
+            <!-- PROFILE INFORMATION -->
+
+            <div class="profile-info">
+
+                <div class="profile-info-item">
+
+                    <span>
+                        📧
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Email
+                        </small>
+
+                        <strong id="profileEmail">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-info-item">
+    <span>🔐</span>
+    <div>
+        <small>Account</small>
+        <strong>Stored locally on this device</strong>
+    </div>
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <span>
+                        🧠
+                    </span>
+
+                    <div>
+
+                        <small>
+                            Journal
+                        </small>
+
+                        <strong>
+                            Your reflections belong to you
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGOUT -->
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                🚪 Log Out
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= BOTTOM NAV ================= -->
+
+    <nav class="bottom-nav">
+
+        <button
+            class="nav-button active"
+            data-page="home"
+        >
+
+            <span>
+                ⌂
+            </span>
+
+            <small>
+                Home
+            </small>
+
+        </button>
+
+
+        <button
+            class="nav-button"
+            data-page="journal"
+        >
+
+            <span>
+                ✍️
+            </span>
+
+            <small>
+                Journal
+            </small>
+
+        </button>
+
+
+        <button
+            class="nav-button ai-nav-button"
+            data-page="ai"
+        >
+
+            <span>
+                ✨
+            </span>
+
+            <small>
+                Mindmate
+            </small>
+
+        </button>
+
+
+        <button
+            class="nav-button"
+            data-page="history"
+        >
+
+            <span>
+                📖
+            </span>
+
+            <small>
+                History
+            </small>
+
+        </button>
+
+    </nav>
+
+</section>
+
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script
+    type="module"
+    src="app.js"
+></script>
+
+</body>
+</html>
