@@ -946,66 +946,159 @@
 ></div>
 
 
-
 <!-- ================= JAVASCRIPT ================= -->
 
 <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-    import {
-        getAuth
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-    import {
-        getFirestore
-    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
+    updateProfile
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyClL06qPDBpR7k-sz8Vcqa9tJcswkEK4mU",
-        authDomain: "mindmate-ai-a8ac2.firebaseapp.com",
-        projectId: "mindmate-ai-a8ac2",
-        storageBucket: "mindmate-ai-a8ac2.firebasestorage.app",
-        messagingSenderId: "364314284635",
-        appId: "1:364314284635:web:8ee8b4b9b1ceee034ce57e",
-        measurementId: "G-SL923KWTBD"
-    };
-
-
-    const firebaseApp =
-        initializeApp(firebaseConfig);
-
-
-    window.firebaseAuth =
-        getAuth(firebaseApp);
-
-
-    window.firebaseDB =
-        getFirestore(firebaseApp);
+import {
+    getFirestore,
+    collection,
+    doc,
+    setDoc,
+    getDoc,
+    getDocs,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    query,
+    orderBy,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-    console.log("Firebase connected ✅");
+const firebaseConfig = {
+
+    apiKey: "AIzaSyClL06qPDBpR7k-sz8Vcqa9tJcswkEK4mU",
+
+    authDomain:
+        "mindmate-ai-a8ac2.firebaseapp.com",
+
+    projectId:
+        "mindmate-ai-a8ac2",
+
+    storageBucket:
+        "mindmate-ai-a8ac2.firebasestorage.app",
+
+    messagingSenderId:
+        "364314284635",
+
+    appId:
+        "1:364314284635:web:8ee8b4b9b1ceee034ce57e",
+
+    measurementId:
+        "G-SL923KWTBD"
+};
 
 
-    window.dispatchEvent(
-        new Event("firebaseReady")
+/* ================= FIREBASE APP ================= */
+
+const firebaseApp =
+    initializeApp(firebaseConfig);
+
+
+/* ================= AUTH ================= */
+
+window.firebaseAuth =
+    getAuth(firebaseApp);
+
+
+/* ================= FIRESTORE ================= */
+
+window.firebaseDB =
+    getFirestore(firebaseApp);
+
+
+/* ================= AUTH FUNCTIONS ================= */
+
+window.firebaseCreateUser =
+    createUserWithEmailAndPassword;
+
+window.firebaseSignIn =
+    signInWithEmailAndPassword;
+
+window.firebaseSignOut =
+    signOut;
+
+window.firebaseAuthState =
+    onAuthStateChanged;
+
+window.firebaseUpdateProfile =
+    updateProfile;
+
+
+/* ================= FIRESTORE FUNCTIONS ================= */
+
+window.firestoreCollection =
+    collection;
+
+window.firestoreDoc =
+    doc;
+
+window.firestoreSetDoc =
+    setDoc;
+
+window.firestoreGetDoc =
+    getDoc;
+
+window.firestoreGetDocs =
+    getDocs;
+
+window.firestoreAddDoc =
+    addDoc;
+
+window.firestoreUpdateDoc =
+    updateDoc;
+
+window.firestoreDeleteDoc =
+    deleteDoc;
+
+window.firestoreQuery =
+    query;
+
+window.firestoreOrderBy =
+    orderBy;
+
+window.firestoreServerTimestamp =
+    serverTimestamp;
+
+
+console.log(
+    "Firebase initialized successfully ✅"
+);
+
+
+/* ================= LOAD APP ================= */
+
+const script =
+    document.createElement("script");
+
+script.src =
+    "app.js";
+
+script.onload = () => {
+
+    console.log(
+        "MindMate loader started ✅"
     );
 
+};
 
-    /*
-       IMPORTANT:
-       Load MindMate only AFTER Firebase
-       has been initialized.
-    */
+document.body.appendChild(script);
 
-    const script =
-        document.createElement("script");
-
-    script.type = "module";
-    script.src = "app.js";
-
-    document.body.appendChild(script);
 </script>
-
 </body>
 </html>
