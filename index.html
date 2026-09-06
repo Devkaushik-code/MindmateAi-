@@ -945,10 +945,63 @@
 
 <!-- ================= JAVASCRIPT ================= -->
 
-<script
-    type="module"
-    src="app.js"
-></script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+    import {
+        getAuth
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+    import {
+        getFirestore
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyClL06qPDBpR7k-sz8Vcqa9tJcswkEK4mU",
+        authDomain: "mindmate-ai-a8ac2.firebaseapp.com",
+        projectId: "mindmate-ai-a8ac2",
+        storageBucket: "mindmate-ai-a8ac2.firebasestorage.app",
+        messagingSenderId: "364314284635",
+        appId: "1:364314284635:web:8ee8b4b9b1ceee034ce57e",
+        measurementId: "G-SL923KWTBD"
+    };
+
+
+    const firebaseApp =
+        initializeApp(firebaseConfig);
+
+
+    window.firebaseAuth =
+        getAuth(firebaseApp);
+
+
+    window.firebaseDB =
+        getFirestore(firebaseApp);
+
+
+    console.log("Firebase connected ✅");
+
+
+    window.dispatchEvent(
+        new Event("firebaseReady")
+    );
+
+
+    /*
+       IMPORTANT:
+       Load MindMate only AFTER Firebase
+       has been initialized.
+    */
+
+    const script =
+        document.createElement("script");
+
+    script.type = "module";
+    script.src = "app.js";
+
+    document.body.appendChild(script);
+</script>
 
 </body>
 </html>
