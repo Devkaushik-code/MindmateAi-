@@ -4,7 +4,7 @@
 
 const scripts = [
     "app-part11.js",
-    "app-part2.js"
+    "app-part22.js"
 ];
 
 function loadScript(src) {
